@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="false" />
+
+    <package name="default" namespace="/" extends="struts-default">
+       <action name="emp-*" class="employeeAction" method="{1}">
+         <result name="list">/WEB-INF/views/emplist.jsp</result>
+         <result name="delete" type="redirect">/emp-list</result>
+       </action>
+       
+       <action name="testpath-*" class="testpathbpelAction" method="{1}">
+       	  <result name="list">/WEB-INF/views/testcaseGeneration.jsp</result>
+       </action>
+       <action name="testcase-*" class="testcasebpelAction" method="{1}">
+       	  <result name="list">/WEB-INF/views/testcaseGeneration.jsp</result>
+       </action>
+       
+       <action name="testbpel-*" class="testbpelAction" method="{1}">
+       	  <result name="list">/WEB-INF/views/testcaseGeneration.jsp</result>
+       	  <result name="pathselect">/WEB-INF/views/testcaseGeneration.jsp</result>
+       </action>
+    </package>
+
+</struts>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		
+		
+   <bean id="employeeDao" class="com.ssh.dao.EmployeeDao">
+      <property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   <bean id="employeeService" class="com.ssh.service.EmployeeService">
+      <property name="employeeDao" ref="employeeDao"></property>
+   </bean>
+   
+   <bean id="employeeAction" class="com.ssh.action.EmployeeAction" scope="prototype">
+      <property name="employeeService" ref="employeeService"></property>
+   </bean>
+   
+   
+   <bean id="testpathbpelDao" class="com.ssh.dao.TestpathbpelDao">
+      <property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   <bean id="testpathbpelService" class="com.ssh.service.TestpathbpelService">
+      <property name="testpathbpelDao" ref="testpathbpelDao"></property>
+   </bean>
+   
+   <bean id="testpathbpelAction" class="com.ssh.action.TestpathbpelAction" scope="prototype">
+      <property name="testpathbpelService" ref="testpathbpelService"></property>
+   </bean>
+
+
+   
+	<bean id="testcasebpelDao" class="com.ssh.dao.TestcasebpelDao">
+      <property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   <bean id="testcasebpelService" class="com.ssh.service.TestcasebpelService">
+      <property name="testcasebpelDao" ref="testcasebpelDao"></property>
+      <property name="testpathbpelDao" ref="testpathbpelDao"></property> 
+   </bean>
+   
+   <bean id="testcasebpelAction" class="com.ssh.action.TestcasebpelAction" scope="prototype">
+      <property name="testcasebpelService" ref="testcasebpelService"></property>
+   </bean>
+   
+   
+   
+    <bean id="testbpelAction" class="com.ssh.action.TestbpelAction" scope="prototype">
+      <property name="testcasebpelService" ref="testcasebpelService"></property>
+      <property name="testpathbpelService" ref="testpathbpelService"></property>
+   </bean>
+</beans>
